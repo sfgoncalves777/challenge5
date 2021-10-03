@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api documentation",
+    "description": "Api for user registration",
+    "version": "1.0.0",
+    "contact": {
+      "email": "silvanibjj@gmail.com"
+    },
+    "paths": {
+      "/": {
+        "post": {
+          "tags": ["User"],
+          "sumary": "Create a user",
+          "description": "Create a new user",
+          "requestBody": {
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "user name sample",
+                    "email": "user@sample.com"
+                  }
+                }
+              } 
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "aplication/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "created_at": {
+                        "type": "date"
+                      },
+                      "updated_at": {
+                        "type": "date"
+                      }
+                    },
+                    "example": {
+                      "name": "user name sample",
+                      "email": "user@sample.com",
+                      "admin": "false",
+                      "craeted_at": "10/03/2021-18:39:40",
+                      "updated_at": "10/03/2021-18:39:40"
+                    }
+                  }
+                } 
+              }
+            },
+            "400": {
+              "description": "User already exist!"
+            }
+          }
+        },
+        "get": {
+          "tags": ["User"],
+          "sumary": "List all users",
+          "description": "List all users",
+          "requestHeaders": {
+            "content": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id": "1"
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "aplication/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "name": {
+                          "type":"string"
+                        },
+                        "email": {
+                          "type":"string"
+                        },
+                        "admin": {
+                          "type":"boolean"
+                        },
+                        "created_at": {
+                          "type":"date"
+                        },
+                        "updated_at": {
+                          "type":"date"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "User not admin!"
+            }
+          }
+        }
+      },
+      "/:user_id": {
+        "get": {
+          "tags": ["User"],
+          "sumary": "Show user",
+          "description": "List info all user",
+          "requestHeaders": {
+            "content": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id": "1"
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "aplication/json":{
+                  "schema":{
+                    "properties": {
+                      "name": {
+                        "type":"string"
+                      },
+                      "email": {
+                        "type":"string"
+                      },
+                      "admin": {
+                        "type":"boolean"
+                      },
+                      "created_at": {
+                        "type":"date"
+                      },
+                      "updated_at": {
+                        "type":"date"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found!"
+            }
+          }
+        }
+      },
+      "/:user_id/admin": {
+        "patch": {
+          "tags": ["User"],
+          "sumary": "User transform in admin",
+          "description": "User transform in admin",
+          "requestHeaders": {
+            "content": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id": "1"
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "aplication/json":{
+                  "schema":{
+                    "properties": {
+                      "name": {
+                        "type":"string"
+                      },
+                      "email": {
+                        "type":"string"
+                      },
+                      "admin": {
+                        "type":"boolean"
+                      },
+                      "created_at": {
+                        "type":"date"
+                      },
+                      "updated_at": {
+                        "type":"date"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found!"
+            }
+          }
+        }
+      }
+    }
+  }
+}
